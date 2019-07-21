@@ -1257,7 +1257,7 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
 int discardHelper(int handPos, int currentPlayer, struct gameState* state)
 {
   // Move card to discard pile and increment
-  state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
+  state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][handPos];
   state->discardCount[currentPlayer]++;
 
   // Cycle remaining player hand into position
