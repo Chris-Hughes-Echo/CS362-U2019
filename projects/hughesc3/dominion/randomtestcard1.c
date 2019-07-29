@@ -87,7 +87,7 @@ int main() {
 	struct gameState G;
 	int n, i, j, p;
 
-	for (n = 0; n < 500; n++) {
+	for (n = 0; n < 1000; n++) {
 		//memset(&G, '0', sizeof(struct gameState));
 		for (i = 0; i < sizeof(struct gameState); i++) {
 			((char*)&G)[i] = floor(Random() * 256);
