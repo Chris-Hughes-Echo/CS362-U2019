@@ -29,11 +29,19 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+randomtestresults: randomtestcard1.c dominion.o
+	echo "Running Random Tests:" > randomtestresults.out
+	echo "randomtest1" >> randomtestresults.out
+	gcc -o randomtest1 randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	echo "compilation complete"
+	./randomtest1 >> randomtestresults.out
+	gcov dominion.c -b -f >> randomtestresults.out
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-all: playdom player 
+all: playdom player randomtestresults
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f randomtest1 randomtestresults.out
