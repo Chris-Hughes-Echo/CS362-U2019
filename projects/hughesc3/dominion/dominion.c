@@ -667,7 +667,7 @@ int baronEffect(struct gameState* state, int choice, int currentPlayer){
             isGameOver(state);
           }
         }
-        card_not_discarded = 1;//Exit the loop
+        card_not_discarded = 0;//Exit the loop
       }			    
       else{
         p++;//Next card
@@ -691,18 +691,19 @@ int minionEffect(struct gameState* state, int choice1, int choice2, int currentP
 {
   int i, j;
   state->numActions++; // +1 action
-  discardCard(handPos, currentPlayer, state, NO_TRASH); // Discard card from hand
+  //discardCard(handPos, currentPlayer, state, NO_TRASH); // Discard card from hand
   
   if (choice1) //+2 coins
   {
     state->coins = state->coins + 2;
   }
-  else if (choice2) //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
+  else //if (choice2) //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
   {
     //discard hand
-    while(numHandCards(state) > 0)
+    while(state->handCount[currentPlayer] > 0)//while(numHandCards(state) > 0)
     {
-      discardCard(handPos, currentPlayer, state, NO_TRASH);
+      //discardCard(handPos, currentPlayer, state, NO_TRASH);
+	  discardHelper(handPos, currentPlayer, state);
     }
     //draw 4
     for (i = 0; i < 4; i++)
@@ -712,12 +713,13 @@ int minionEffect(struct gameState* state, int choice1, int choice2, int currentP
     //other players discard hand and redraw if hand size > 4
     for (i = 0; i < state->numPlayers; i++)
     {
-      if (i != currentPlayer || state->handCount[i] > 4)
+      if (i != currentPlayer && state->handCount[i] > 4)
       {
         //discard hand
         while( state->handCount[i] > 0 )
         {
-          discardCard(handPos, i, state, NO_TRASH);
+          //discardCard(handPos, i, state, NO_TRASH);
+		  discardHelper(handPos, i, state);
         }
         //draw 4
         for (j = 0; j < 4; j++)
@@ -884,7 +886,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   int currentPlayer = whoseTurn(state);
   int nextPlayer = currentPlayer + 1;
 
-  int tributeRevealedCards[2] = {-1, -1};
   int temphand[MAX_HAND];// moved above the if statement
   int drawntreasure=0;
   int cardDrawn;
@@ -1257,17 +1258,17 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
 int discardHelper(int handPos, int currentPlayer, struct gameState* state)
 {
   // Move card to discard pile and increment
-  state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
+  state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][handPos];
   state->discardCount[currentPlayer]++;
 
   // Cycle remaining player hand into position
   int i;
-  for (i = handPos; i < state->handCount[currentPlayer]; i++){
+  for (i = handPos; i < (state->handCount[currentPlayer] - 1); i++){
     state->hand[currentPlayer][i] = state->hand[currentPlayer][i+1];
   }
 
   // Invalidate last card in hand and decrement
-  state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
+  state->hand[currentPlayer][state->handCount[currentPlayer] - 1] = -1;
   state->handCount[currentPlayer]--;
   return 0;
 }

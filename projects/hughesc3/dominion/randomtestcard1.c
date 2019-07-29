@@ -33,7 +33,7 @@ int baronTest(int p, struct gameState* state) {
 	memcpy (&pre, state, sizeof(struct gameState));
 
 	int choice = roundRandom(Random());
-	int result = baronEffect(state, choice, p);
+	baronEffect(state, choice, p);
 
 	numErrors += assertTrue(state->numBuys == (pre.numBuys + 1)); // +1 Buy test
 
@@ -117,10 +117,10 @@ int main() {
 
 		printf("Case %d: numP=%d, p=%d, deck=%d, discard=%d, hand=%d, buys=%d, supply=%d, hasEstate=%d ... ", 
 				n+1, G.numPlayers, p, G.deckCount[p], G.discardCount[p], G.handCount[p], G.numBuys, G.supplyCount[estate], hasEstate);
-		fflush(stdout);
+		//fflush(stdout);
 		int numErrors = baronTest(p, &G);
 		printf("Errors: %d\n", numErrors);
-		fflush(stdout);
+		//fflush(stdout);
 	}
 	return 0;
 }
