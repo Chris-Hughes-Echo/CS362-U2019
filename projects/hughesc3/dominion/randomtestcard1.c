@@ -8,18 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <time.h>
 #include <math.h>
-
-#define NEG_CHOICE 0
-#define POS_CHOICE 1
-#define NO_HAND_ESTATE 0
-#define YES_HAND_ESTATE 1
-#define NO_SUPPLY_ESTATE 0
-#define YES_SUPPLY_ESTATE 1
-#define MIN_PLAYERS 2
-#define MAX_PLAYERS 4
-#define NUM_PLAYERS 2
 
 int assertTrue(int a) {
 	if (a) {
