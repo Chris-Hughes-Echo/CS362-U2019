@@ -15,8 +15,8 @@
 #define MIN_ASCII_LOWER 97
 #define MAX_ASCII_LOWER 122
 
-//const char* lowerVowels = "aeiou";
-//const char* lowerConsonants = "bcdfghjklmnpqrstvwxyz";
+const char* lowerVowels = "aeiou";
+const char* lowerConsonants = "bcdfghjklmnpqrstvwxyz";
 
 char inputChar()
 {
@@ -33,8 +33,7 @@ char *inputString()
 	int i;
 	char* outString = malloc((STRING_LENGTH + 1) * sizeof(char));
 	
-	/*
-	 * Tighter restriction based on vowel-consonant expectations in exit condition
+	// Tighter restriction based on vowel-consonant expectations in exit condition
 	for (i = 0; i < STRING_LENGTH; i++) {
 		if (i == 0 || i == 2 || i == 4) { // Generate lower-case consonant
 			outString[i] = lowerConsonants[rand() % NUM_CONSONANTS];
@@ -43,12 +42,15 @@ char *inputString()
 			outString[i] = lowerVowels[rand() % NUM_VOWELS];
 		}
 	}
-	*/
 
-	// Fills string with random lowercase letters
+	/*
+	 * Looser restriction fills string with random lowercase letters
+	 * Had to abandon due to lengthy tests
 	for (i = 0; i < STRING_LENGTH; i++) {
 		outString[i] = (char)((rand() % (MAX_ASCII_LOWER - MIN_ASCII_LOWER + 1)) + MIN_ASCII_LOWER);
 	}
+	*/
+
 	outString[STRING_LENGTH] = '\0';
 
 	return outString;
