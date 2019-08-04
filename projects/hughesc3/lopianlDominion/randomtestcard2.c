@@ -1,5 +1,6 @@
 // randomtestcard2.c tests function minionEffect
 // int minionEffect(struct gameStatee*, int choice1, int choice2, int currentPlayer, int handPos)
+// int playMinion(struct gameState* state, int handPos, int currentPlayer, int choice1, int choice2)
 
 #include "dominion.h"
 #include "dominion_helpers.h"
@@ -33,7 +34,8 @@ int minionTest(int p, int choice1, int choice2, struct gameState* state) {
 	struct gameState pre;
 	memcpy (&pre, state, sizeof(struct gameState));
 
-	minionEffect(state, choice1, choice2, p, 0);
+	//minionEffect(state, choice1, choice2, p, 0);
+	playMinion(state, 0, p, choice1, choice2);
 
 	numErrors += assertTrue(state->numActions == (pre.numActions + 1));
 	//pre.numActions++;

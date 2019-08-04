@@ -1,5 +1,5 @@
 // randomtestcard1.c tests function baronEffect
-// int baronEffect(struct gameState* state, int choice, int currentPlayer)
+// int playBaron(struct gameState* state, int choice1, int currentPlayer)
 
 #include "dominion.h"
 #include "dominion_helpers.h"
@@ -33,7 +33,7 @@ int baronTest(int p, struct gameState* state) {
 	memcpy (&pre, state, sizeof(struct gameState));
 
 	int choice = roundRandom(Random());
-	baronEffect(state, choice, p);
+	playBaron(state, choice, p);
 
 	numErrors += assertTrue(state->numBuys == (pre.numBuys + 1)); // +1 Buy test
 
