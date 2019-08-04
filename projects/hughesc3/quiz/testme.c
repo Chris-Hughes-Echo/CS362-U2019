@@ -3,20 +3,33 @@
 #include<stdlib.h>
 #include<time.h>
 
+#define MIN_ASCII 32
+#define MAX_ASCII 126
+#define STRING_LENGTH 5
+
 char inputChar()
 {
     // TODO: rewrite this function
-	// Generate random int from 32 to 126 inclusive and cast to char
+	// Generate random int from MIN_ASCII to MAX_ASCII inclusive and cast to char
 	// This will yield a character between ' ' and '~' inclusive
-	char randChar = (char)((rand() % 95) + 32);
+	return (char)((rand() % (MAX_ASCII - MIN_ASCII + 1)) + MIN_ASCII);
     //return ' ';
-	return randChar
 }
 
 char *inputString()
 {
     // TODO: rewrite this function
-    return "";
+	
+	int i;
+	char* outString = malloc((STRING_LENGTH + 1) * sizeof(char));
+	
+	for (i = 0; i < STRING_LENGTH; i++) {
+		outString[i] = inputChar();
+	}
+	outString[STRING_LENGTH] = '\0';
+
+	return outString;
+    //return "";
 }
 
 void testme()
