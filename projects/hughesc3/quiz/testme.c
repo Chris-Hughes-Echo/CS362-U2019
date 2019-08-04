@@ -6,7 +6,11 @@
 char inputChar()
 {
     // TODO: rewrite this function
-    return ' ';
+	// Generate random int from 32 to 126 inclusive and cast to char
+	// This will yield a character between ' ' and '~' inclusive
+	char randChar = (char)((rand() % 95) + 32);
+    //return ' ';
+	return randChar
 }
 
 char *inputString()
@@ -47,7 +51,6 @@ void testme()
     }
   }
 }
-
 
 int main(int argc, char *argv[])
 {
