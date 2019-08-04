@@ -1,7 +1,7 @@
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS= -Wall -g -coverage -std=c99
 
 testme: testme.c
-	gcc -o runtest testme.c -g $(CFLAGS)
+	gcc -o runtest testme.c $(CFLAGS)
 	./runtest
 
 clean:
